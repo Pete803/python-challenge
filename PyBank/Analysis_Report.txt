@@ -1,2 +1,5 @@
-There are 86 total months in this data set
-The net total of data set is $38382578
+Analysis Report
+-------------------------------
+Total Months: 86
+Net Total: $38382578
+Average Change: $0
