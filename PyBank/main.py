@@ -49,9 +49,10 @@ analysis_report = (
     "-------------------------------\n"
     f"Total Months: {total_months}\n"
     f"Net Total: ${net_total}\n"
-    f"Average Change: ${avg_change}\n"
-    f"Greatest Increase in Profits: ${max_change}\n"
-    f"Greatest Decrease in Profits: ${min_change}\n"
+    f"Total Changes: ${current_value}\n"
+    f"Average Change: ${rev_change}\n"
+    f"Greatest Increase in Profits: {max_change}\n"
+    f"Greatest Decrease in Profits: {min_change}\n"
 
 )
 print(analysis_report)
