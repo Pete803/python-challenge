@@ -23,6 +23,8 @@ rev_change = 0
 avg_change = 0
 max_change = 0
 min_change = 0
+previous_value = 0
+rev_change_list = []
 
 # Path to collect data from the Resources folder
 budget_csv = os.path.join('..', 'Resources', 'budget_data.csv')
@@ -35,8 +37,11 @@ with open(budget_csv, 'r') as csvfile:
     # Loop through the data
     for row in csvreader:
         total_months += 1
-        net_total += int(row[1])   
-        avg_change = int(row[1])/len(rev_change)
+        net_total += int(row[1])
+        current_value = int(row[1])   
+        rev_change = current_value - previous_value
+        rev_change_list.append(rev_change)
+        previous_value = current_value
         print(row)
     
 analysis_report = (
