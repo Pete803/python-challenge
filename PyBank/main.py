@@ -24,6 +24,9 @@ max_change = 0
 min_change = 0
 current_value = 0
 previous_value = 0
+max_date = [0]
+min_date = [0]
+# months = []
 rev_change_list = []
 
 # Path to collect data from the Resources folder
@@ -46,8 +49,10 @@ with open(budget_csv, 'r') as csvfile:
         previous_value = current_value
         if max_change < rev_change:
             max_change = rev_change
+            max_date = row[0]
         if min_change > rev_change:
             min_change = rev_change
+            min_date = row[0]
         print(row)
     
 # Analysis Report    
@@ -57,8 +62,8 @@ analysis_report = (
     f"Total Months: {total_months}\n"
     f"Net Total: ${net_total}\n"
     f"Average Change: ${rev_change}\n"
-    f"Greatest Increase in Profits: {max_change}\n"
-    f"Greatest Decrease in Profits: {min_change}\n"
+    f"Greatest Increase in Profits: {max_date} {max_change}\n"
+    f"Greatest Decrease in Profits: {min_date} {min_change}\n"
 
 )
 print(analysis_report)
