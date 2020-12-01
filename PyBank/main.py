@@ -25,6 +25,7 @@ min_change = 0
 current_value = 0
 previous_value = 0
 rev_change_list = []
+greatest_inc = 0
 
 # Path to collect data from the Resources folder
 budget_csv = os.path.join('..', 'Resources', 'budget_data.csv')
@@ -44,6 +45,10 @@ with open(budget_csv, 'r') as csvfile:
         rev_change = current_value - previous_value
         rev_change_list.append(rev_change)
         previous_value = current_value
+        if greatest_inc < rev_change:
+            greatest_inc = rev_change
+
+        
         print(row)
     
 # Analysis Report    
@@ -53,7 +58,7 @@ analysis_report = (
     f"Total Months: {total_months}\n"
     f"Net Total: ${net_total}\n"
     f"Average Change: ${rev_change}\n"
-    f"Greatest Increase in Profits: {max_change}\n"
+    f"Greatest Increase in Profits: {greatest_inc}\n"
     f"Greatest Decrease in Profits: {min_change}\n"
 
 )
@@ -61,3 +66,22 @@ print(analysis_report)
 
 with open("Analysis_Report.txt",'w') as outputfile:
     outputfile.write(analysis_report)
+
+
+    # [1,3,2,5,4]
+    # max = first ele
+    # loop each ele ----- ele > max ------ max = ele
+    '''
+    max = 1 ele - 1
+    max = 1
+    ele -3 max = 1
+    max = 3
+    ele = 2 max 3
+    max = 3
+    ele = 5 max = 3
+    max = 5
+    ele = 4 max = 5
+    max = 5 
+    
+    
+    '''
