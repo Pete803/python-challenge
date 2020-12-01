@@ -20,9 +20,9 @@ import csv
 total_months = 0
 net_total = 0
 rev_change = 0
-avg_change = 0
 max_change = 0
 min_change = 0
+current_value = 0
 previous_value = 0
 rev_change_list = []
 
@@ -32,8 +32,10 @@ with open(budget_csv, 'r') as csvfile:
 
     # Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
+
     # skip and save header
     column_names = next(csvreader)
+
     # Loop through the data
     for row in csvreader:
         total_months += 1
@@ -44,12 +46,12 @@ with open(budget_csv, 'r') as csvfile:
         previous_value = current_value
         print(row)
     
+# Analysis Report    
 analysis_report = (
     "Analysis Report\n"
     "-------------------------------\n"
     f"Total Months: {total_months}\n"
     f"Net Total: ${net_total}\n"
-    f"Total Changes: ${current_value}\n"
     f"Average Change: ${rev_change}\n"
     f"Greatest Increase in Profits: {max_change}\n"
     f"Greatest Decrease in Profits: {min_change}\n"
