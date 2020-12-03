@@ -1,3 +1,5 @@
+#CSV Layout
+#Voter ID, County, Candidate
 
 # You will be given a set of poll data called election_data.csv. 
 # The dataset is composed of three columns: Voter ID, County, and Candidate.
@@ -43,27 +45,24 @@ with open(poll_csv, 'r') as csvfile:
 
     # Loop through the data
     for row in csvreader:
-        total_votes = (row[0])
-        vote_count = sum(total_votes)
-        print(vote_count)
+        total_votes = total_votes + 1
         
 
 
-# # Analysis Report    
-# analysis_report = (
-#     "Analysis Report\n"
-#     "-------------------------------\n"
-#     f"Total Votes: {total_votes}\n"
-#      "-------------------------------\n"
-#     f"Khan: {}\n"
-#     f"Correy: {}\n"
-#     f"Li: {} {}\n"
-#     f"O'Tooley: {} {}\n"
-#      "-------------------------------\n"
-#     f"Winner: {}\n"
+# Analysis Report    
+analysis_report = (
+     "Analysis Report\n"
+     "-------------------------------\n"
+    f"Total Votes: {total_votes}\n"
+     "-------------------------------\n"
+    f"Khan: \n"
+    f"Correy: \n"
+    f"Li:  \n"
+    f"O'Tooley:  \n"
+     "-------------------------------\n"
+    f"Winner: \n"
+)
+print(analysis_report)
 
-# )
-# print(analysis_report)
-
-# with open("Analysis_Report_Election.txt",'w') as outputfile:
-#     outputfile.write(analysis_report)
+with open("Analysis_Report_Election.txt",'w') as outputfile:
+    outputfile.write(analysis_report)
