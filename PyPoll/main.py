@@ -27,10 +27,11 @@ import os
 import csv
 
 total_votes = 0
-candidate_count = []
+candidate_count = {}
 unique_candidates = []
 vote_count_per = []
 percent_won = []
+candidate_analysis = []
 
 # Path to collect data from the Resources folder
 poll_csv = os.path.join('..', 'Resources', 'election_data.csv')
@@ -46,22 +47,18 @@ with open(poll_csv, 'r') as csvfile:
     for row in csvreader:
         total_votes = total_votes + 1
         
-        # List candidates
-        if (row[2] not in candidate_count):
-            candidate_count.append(row[2])
-        
-        # Get Unique Candidate Names
-    for a in set(candidate_count):
-        unique_candidates.append(a)
-        # b is total votes per candidate
-        b = candidate_count.count(a)
-        vote_count_per.append(b)
-        # c is percent of total votes per candidate
-        c = (b/total_votes)*100
-        percent_won.append(c)
-
-    vote_winner = max(vote_count_per)
-    winner = unique_candidates[vote_count_per.index(vote_winner)] 
+        if (row[2] in candidate_count):
+            candidate_count[row[2]] += 1
+        # If this is 1st vote for candidate, then set vote count =1    
+        else:
+            candidate_count[row[2]] = 1
+            
+winner = ""
+winner_count = 0
+for candidate in candidate_count:
+    if candidate_count[candidate] > winner_count:
+        winner_count = candidate_count[candidate]
+        winner = candidate
 
 # Analysis Report    
 analysis_report = (
@@ -69,11 +66,14 @@ analysis_report = (
      "-------------------------------\n"
     f"Total Votes: {total_votes}\n"
      "-------------------------------\n"
-    f"{a}\n"
-     "-------------------------------\n"
-    f"Winner: {winner}\n"
      )
+for candidate in candidate_count:
+    analysis_report += f"{candidate} = "
+    analysis_report += f"{candidate_count[candidate]} ("
+    analysis_report += f"{round((candidate_count[candidate]/total_votes)*100,2)}%)\n"
+analysis_report +="-------------------------------\n"
 
+analysis_report += f"Winner: {winner}\n"
 print(analysis_report)
 
 with open("Analysis_Report_Election.txt",'w') as outputfile:
