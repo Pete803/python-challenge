@@ -27,11 +27,10 @@ import os
 import csv
 
 total_votes = 0
-votes = []
 candidate_count = []
 unique_candidates = []
-vote_count = []
-percent = []
+vote_count_per = []
+percent_won = []
 
 # Path to collect data from the Resources folder
 poll_csv = os.path.join('..', 'Resources', 'election_data.csv')
@@ -43,25 +42,38 @@ with open(poll_csv, 'r') as csvfile:
     # skip and save header
     column_names = next(csvreader)
 
-    # Loop through the data
+    # Count total votes
     for row in csvreader:
         total_votes = total_votes + 1
         
+        # List candidates
+        if (row[2] not in candidate_count):
+            candidate_count.append(row[2])
+        
+        # Get Unique Candidate Names
+    for a in set(candidate_count):
+        unique_candidates.append(a)
+        # b is total votes per candidate
+        b = candidate_count.count(a)
+        vote_count_per.append(b)
+        # c is percent of total votes per candidate
+        c = (b/total_votes)*100
+        percent_won.append(c)
 
+    vote_winner = max(vote_count_per)
+    winner = unique_candidates[vote_count_per.index(vote_winner)] 
 
 # Analysis Report    
 analysis_report = (
-     "Analysis Report\n"
+     "Election Results\n"
      "-------------------------------\n"
     f"Total Votes: {total_votes}\n"
      "-------------------------------\n"
-    f"Khan: \n"
-    f"Correy: \n"
-    f"Li:  \n"
-    f"O'Tooley:  \n"
+    f"{a}\n"
      "-------------------------------\n"
-    f"Winner: \n"
-)
+    f"Winner: {winner}\n"
+     )
+
 print(analysis_report)
 
 with open("Analysis_Report_Election.txt",'w') as outputfile:

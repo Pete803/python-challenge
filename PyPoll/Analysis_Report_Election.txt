@@ -1,10 +1,7 @@
-Analysis Report
+Election Results
 -------------------------------
 Total Votes: 3521001
 -------------------------------
-Khan: 
-Correy: 
-Li:  
-O'Tooley:  
+O'Tooley
 -------------------------------
-Winner: 
+Winner: Li
